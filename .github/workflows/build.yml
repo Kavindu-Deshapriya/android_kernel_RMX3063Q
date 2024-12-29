@@ -1,0 +1,35 @@
+name: Kernel Build
+
+on:
+  push:
+    branches:
+      - main  # Change this to your desired branch if it's not 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        submodules: true  # Ensure submodules are initialized and updated
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y curl git
+
+    - name: Run kernel build script
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}  # Pass the secret as an environment variable
+        CHAT_ID: ${{ secrets.CHAT_ID }}      # Pass the secret as an environment variable
+      run: |
+        chmod +x ./run.sh
+        ./run.sh
+
+    - name: Upload Kernel Build Artifact (optional)
+      uses: actions/upload-artifact@v3
+      with:
+        name: kernel-build
+        path: ./zipd/
