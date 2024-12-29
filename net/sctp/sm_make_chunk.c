@@ -2153,6 +2153,7 @@ static sctp_ierror_t sctp_verify_param(struct net *net,
 	case SCTP_PARAM_SET_PRIMARY:
 		if (!net->sctp.addip_enable)
 			goto fallthrough;
+
 		if (ntohs(param.p->length) < sizeof(struct sctp_addip_param) +
 					     sizeof(struct sctp_paramhdr)) {
 			sctp_process_inv_paramlength(asoc, param.p,
