@@ -5,7 +5,7 @@
 TIMESTAMP=$(date +"%Y%m%d")
 DATES=$(date +"%Y-%m-%d")
 FW=RUI1
-KSU=0  # KernelSU Setup (0 = No, 1 = Yes)
+KSU=1  # KernelSU Setup (0 = No, 1 = Yes)
 USE_CUSTOM_GCC=1 # Use Custom GCC Toolchain (0 = No, 1 = Yes)
 
 # Get Telegram Bot Token and Chat ID from environment variables
