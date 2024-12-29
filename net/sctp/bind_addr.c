@@ -297,10 +297,16 @@ int sctp_raw_to_bind_addrs(struct sctp_bind_addr *bp, __u8 *raw_addr_list,
 			/* Can't finish building the list, clean up. */
 			goto out_err;
 
+next:
 		len = ntohs(param->length);
 		addrs_len -= len;
 		raw_addr_list += len;
 	}
+
+	return retval;
+out_err:
+	if (retval)
+		sctp_bind_addr_clean(bp);
 
 	return retval;
 }
