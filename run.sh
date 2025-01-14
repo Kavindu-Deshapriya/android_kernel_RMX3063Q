@@ -36,7 +36,7 @@ git clone --depth=1 https://github.com/Kavindu-Deshapriya/AnyKernel3 anykernel
 # KernelSU Setup (If KSU is enabled)
 if [[ $KSU == "1" ]]; then
     echo "Setting up KernelSU..."
-    curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s -- --cleanup
+    # curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s -- --cleanup
     curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
 fi
 
