@@ -57,8 +57,8 @@ curl -X POST --silent --output /dev/null https://api.telegram.org/bot${BOT_TOKEN
 # Build Kernel
 export PATH="${PWD}/clang/bin:$PATH"
 export CC="${PWD}/clang/bin/clang"
-export KBUILD_BUILD_USER="GitHub Actions"
-export KBUILD_BUILD_HOST="github-actions"
+export KBUILD_BUILD_USER="Snowluna"
+export KBUILD_BUILD_HOST="nefertari"
 
 if [[ -d "gcc64" ]]; then
     echo "Using custom GCC toolchain for 64-bit..."
