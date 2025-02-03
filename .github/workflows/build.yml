@@ -29,7 +29,7 @@ jobs:
         ./run.sh
 
     - name: Upload Kernel Build Artifact (optional)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: kernel-build
         path: ./zipd/
