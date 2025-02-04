@@ -42,7 +42,7 @@ if [[ $KSU == "1" ]]; then
 fi
 
 # Apply KernelSU-Next Patch (after KernelSU setup)
-PATCH_FILE="patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch"  # Path to your local patch
+PATCH_FILE="KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch"  # Path to your local patch
 echo "Applying KernelSU-Next patch from $PATCH_FILE..."
 if [[ -f "$PATCH_FILE" ]]; then
     git apply "$PATCH_FILE" || { echo "Failed to apply patch!"; exit 1; }
