@@ -66,7 +66,7 @@ patch -p1 < 50_add_susfs_in_kernel-4.9.patch
 
 # Step 3: Apply the SUSFS patch from the susfs4ksu repo
 echo "Applying patches from susfs4ksu..."
-cd $KERNEL_ROOT/susfs4ksu
+cd ./susfs4ksu
 patch -p1 < 10_enable_susfs_for_ksu.patch
 
 # Custom GCC Setup (If enabled)
