@@ -55,7 +55,7 @@ ls
 echo "Applying SUSFS patches..."
 
 # Step 1: Copy the required patch files
-cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./KernelSU/
+cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./KernelSU-Next/
 cp ./kernel_patches/50_add_susfs_in_kernel-4.9.patch ./
 cp ./kernel_patches/fs/susfs.c ./fs/
 cp ./kernel_patches/include/linux/susfs.h ./include/linux/
@@ -63,7 +63,7 @@ cp ./kernel_patches/include/linux/susfs.h ./include/linux/
 # Step 2: Apply SUSFS patches
 ls
 echo "Patching KernelSU for SUSFS..."
-cd ./KernelSU
+cd ./KernelSU-Next
 patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
 
 echo "Patching the Kernel for SUSFS..."
