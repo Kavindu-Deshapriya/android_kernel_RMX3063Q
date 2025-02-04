@@ -37,7 +37,7 @@ git clone --depth=1 https://github.com/Kavindu-Deshapriya/AnyKernel3 anykernel
 if [[ $KSU == "1" ]]; then
     echo "Setting up KernelSU..."
     curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s -- --cleanup
-    curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
+    curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
     # curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
 fi
 
