@@ -48,7 +48,7 @@ find . -type f -exec chmod 777 {} +
 
 # Clone the SUSFS repository from GitLab
 echo "Cloning the SUSFS4KSU repository..."
-git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git /susfs4ksu
+git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git ./susfs4ksu
 
 # Apply the SUSFS patch
 echo "Applying SUSFS patches..."
