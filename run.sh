@@ -51,7 +51,7 @@ fi
 
 if [[ $WIREGUARD == "1" ]]; then
     echo "Integrating Wireguard..."
-    $ bash patches/patch-kernel.sh /
+    ./patches/patch-kernel.sh "$(pwd)"
 fi
 
 # Permissions Setup
