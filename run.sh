@@ -41,17 +41,6 @@ if [[ $KSU == "1" ]]; then
     # curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
 fi
 
-# Apply KernelSU-Next Patch (after KernelSU setup)
-PATCH_FILE="KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch"  # Path to your local patch
-echo "Applying KernelSU-Next patch from $PATCH_FILE..."
-if [[ -f "$PATCH_FILE" ]]; then
-    git apply "$PATCH_FILE" || { echo "Failed to apply patch!"; exit 1; }
-    echo "KernelSU-Next patch applied successfully!"
-else
-    echo "Patch file not found at $PATCH_FILE"
-    exit 1
-fi
-
 # Custom GCC Setup (If enabled)
 if [[ $USE_CUSTOM_GCC == "1" ]]; then
     echo "Cloning custom GCC toolchains..."
@@ -79,7 +68,7 @@ if [[ -d "gcc64" ]]; then
 else
     echo "Using default GCC toolchain..."
     make -j$(nproc --all) O=out ARCH=arm64 oppo6765_defconfig
-    make -j$(nproc --all) ARCH=arm64 O=out CC="clang" CROSS_COMPILE=aarch64-linux-gnueabi- CROSS_COMPILE_ARM32=arm-linux-gnueabi-
+    make -j$(nproc --all) ARCH=arm64 O=out CC="clang" CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi-
 fi
 
 # Check if Kernel is compiled successfully
