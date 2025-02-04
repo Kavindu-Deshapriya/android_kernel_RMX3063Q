@@ -67,7 +67,7 @@ patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
 
 echo "Patching the Kernel for SUSFS..."
 ls
-cd "$(pwd)"
+cd ..
 ls
 patch -p1 < 50_add_susfs_in_kernel-4.9.patch
 
