@@ -46,6 +46,10 @@ fi
 echo "Cloning the SUSFS4KSU repository..."
 git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git /susfs4ksu
 
+# Permissions Setup
+echo "Setting permissions for all files..."
+find . -type f -exec chmod 777 {} +
+
 # Apply the SUSFS patch
 echo "Applying SUSFS patches..."
 
@@ -80,10 +84,6 @@ if [[ $WIREGUARD == "1" ]]; then
     echo "Integrating Wireguard..."
     ./patches/patch-kernel.sh "$(pwd)"
 fi
-
-# Permissions Setup
-echo "Setting permissions for all files..."
-find . -type f -exec chmod 777 {} +
 
 # Notify Telegram about the build start
 curl -X POST --silent --output /dev/null https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d text="|| Building Kernel..."
