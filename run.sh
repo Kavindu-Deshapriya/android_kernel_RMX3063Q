@@ -54,10 +54,10 @@ git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git ./susfs4ksu
 echo "Applying SUSFS patches..."
 
 # Step 1: Copy the required patch files
-cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./KernelSU/
-cp ./kernel_patches/50_add_susfs_in_kernel-4.9.patch ./
-cp ./kernel_patches/fs/susfs.c ./fs/
-cp ./kernel_patches/include/linux/susfs.h ./include/linux/
+cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch /KernelSU/
+cp ./kernel_patches/50_add_susfs_in_kernel-4.9.patch /
+cp ./kernel_patches/fs/susfs.c /fs/
+cp ./kernel_patches/include/linux/susfs.h /include/linux/
 
 # Step 2: Apply SUSFS patches
 echo "Patching KernelSU for SUSFS..."
