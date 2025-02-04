@@ -38,7 +38,7 @@ git clone --depth=1 https://github.com/Kavindu-Deshapriya/AnyKernel3 anykernel
 if [[ $KSU == "1" ]]; then
     echo "Setting up KernelSU..."
     curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s -- --cleanup
-    curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
+    curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
     # curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
 fi
 
@@ -54,21 +54,18 @@ git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git ./susfs4ksu
 echo "Applying SUSFS patches..."
 
 # Step 1: Copy the required patch files
-cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./KernelSU-Next/
-echo "hehe"
+# cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./KernelSU-Next/
 cp ./susfs4ksu/kernel_patches/50_add_susfs_in_kernel-4.9.patch ./
 cp ./susfs4ksu/kernel_patches/fs/susfs.c ./fs/
 cp ./susfs4ksu/kernel_patches/include/linux/susfs.h ./include/linux/
 
 # Step 2: Apply SUSFS patches
-echo "Patching KernelSU for SUSFS..."
-cd ./KernelSU-Next
-patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
+# echo "Patching KernelSU for SUSFS..."
+# cd ./KernelSU-Next
+# patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
 
 echo "Patching the Kernel for SUSFS..."
-ls
-cd ..
-ls
+cd ./
 patch -p1 < 50_add_susfs_in_kernel-4.9.patch
 
 # Custom GCC Setup (If enabled)
