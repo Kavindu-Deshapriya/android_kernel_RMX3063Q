@@ -42,6 +42,33 @@ if [[ $KSU == "1" ]]; then
     # curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
 fi
 
+# Clone the SUSFS repository from GitLab
+echo "Cloning the SUSFS4KSU repository..."
+git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git /susfs4ksu
+
+# Apply the SUSFS patch
+echo "Applying SUSFS patches..."
+
+# Step 1: Copy the required patch files
+cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./KernelSU/
+cp ./kernel_patches/50_add_susfs_in_kernel-4.9.patch ./
+cp ./kernel_patches/fs/susfs.c ./fs/
+cp ./kernel_patches/include/linux/susfs.h ./include/linux/
+
+# Step 2: Apply SUSFS patches
+echo "Patching KernelSU for SUSFS..."
+cd ./KernelSU
+patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
+
+echo "Patching the Kernel for SUSFS..."
+cd ./
+patch -p1 < 50_add_susfs_in_kernel-4.9.patch
+
+# Step 3: Apply the SUSFS patch from the susfs4ksu repo
+echo "Applying patches from susfs4ksu..."
+cd $KERNEL_ROOT/susfs4ksu
+patch -p1 < 10_enable_susfs_for_ksu.patch
+
 # Custom GCC Setup (If enabled)
 if [[ $USE_CUSTOM_GCC == "1" ]]; then
     echo "Cloning custom GCC toolchains..."
