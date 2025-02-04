@@ -7,7 +7,7 @@ DATES=$(date +"%Y-%m-%d")
 FW=RUI1
 KSU=1  # KernelSU Setup (0 = No, 1 = Yes)
 USE_CUSTOM_GCC=1 # Use Custom GCC Toolchain (0 = No, 1 = Yes)
-WIREGUARD=1 # Integrate wireguard (0 = No, 1 = yes)
+WIREGUARD=0 # Integrate wireguard (0 = No, 1 = yes)
 
 # Get Telegram Bot Token and Chat ID from environment variables
 BOT_TOKEN="$BOT_TOKEN"
@@ -51,7 +51,6 @@ echo "Cloning the SUSFS4KSU repository..."
 git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git ./susfs4ksu
 
 # Apply the SUSFS patch
-ls
 echo "Applying SUSFS patches..."
 
 # Step 1: Copy the required patch files
@@ -61,23 +60,13 @@ cp ./susfs4ksu/kernel_patches/fs/susfs.c ./fs/
 cp ./susfs4ksu/kernel_patches/include/linux/susfs.h ./include/linux/
 
 # Step 2: Apply SUSFS patches
-ls
 echo "Patching KernelSU for SUSFS..."
 cd ./KernelSU-Next
 patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
 
 echo "Patching the Kernel for SUSFS..."
-ls
 cd ./
-ls
 patch -p1 < 50_add_susfs_in_kernel-4.9.patch
-
-# Step 3: Apply the SUSFS patch from the susfs4ksu repo
-echo "Applying patches from susfs4ksu..."
-ls
-cd ./susfs4ksu
-ls
-patch -p1 < 10_enable_susfs_for_ksu.patch
 
 # Custom GCC Setup (If enabled)
 if [[ $USE_CUSTOM_GCC == "1" ]]; then
