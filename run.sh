@@ -7,6 +7,7 @@ DATES=$(date +"%Y-%m-%d")
 FW=RUI1
 KSU=1  # KernelSU Setup (0 = No, 1 = Yes)
 USE_CUSTOM_GCC=1 # Use Custom GCC Toolchain (0 = No, 1 = Yes)
+WIREGUARD=1 # Integrate wireguard (0 = No, 1 = yes)
 
 # Get Telegram Bot Token and Chat ID from environment variables
 BOT_TOKEN="$BOT_TOKEN"
@@ -46,6 +47,11 @@ if [[ $USE_CUSTOM_GCC == "1" ]]; then
     echo "Cloning custom GCC toolchains..."
     git clone --depth=1 https://github.com/EternalX-project/aarch64-linux-gnu.git gcc64
     git clone --depth=1 https://github.com/EternalX-project/arm-linux-gnueabi.git gcc32
+fi
+
+if [[ $WIREGUARD == "1" ]]; then
+    echo "Integrating Wireguard..."
+    $ ./patches/patch-kernel.sh /
 fi
 
 # Permissions Setup
