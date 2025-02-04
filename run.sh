@@ -42,13 +42,13 @@ if [[ $KSU == "1" ]]; then
     # curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
 fi
 
-# Clone the SUSFS repository from GitLab
-echo "Cloning the SUSFS4KSU repository..."
-git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git /susfs4ksu
-
 # Permissions Setup
 echo "Setting permissions for all files..."
 find . -type f -exec chmod 777 {} +
+
+# Clone the SUSFS repository from GitLab
+echo "Cloning the SUSFS4KSU repository..."
+git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git /susfs4ksu
 
 # Apply the SUSFS patch
 echo "Applying SUSFS patches..."
