@@ -68,6 +68,10 @@ echo "Patching the Kernel for SUSFS..."
 cd ..
 patch -p1 < 50_add_susfs_in_kernel-4.9.patch
 
+# Replace fs/open.c with manually patched version
+echo "Replacing fs/open.c with manually patched version..."
+cp patches/open.c fs/open.c
+
 # Custom GCC Setup (If enabled)
 if [[ $USE_CUSTOM_GCC == "1" ]]; then
     echo "Cloning custom GCC toolchains..."
