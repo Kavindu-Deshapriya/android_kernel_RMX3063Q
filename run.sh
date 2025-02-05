@@ -48,7 +48,7 @@ find . -type f -exec chmod 777 {} +
 
 # Clone the SUSFS repository from GitLab
 echo "Cloning the SUSFS4KSU repository..."
-git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git ./susfs4ksu
+git clone --depth=1 --branch kernel-4.9 https://gitlab.com/simonpunk/susfs4ksu.git ./susfs4ksu
 
 # Apply the SUSFS patch
 echo "Applying SUSFS patches..."
@@ -69,8 +69,8 @@ cd ..
 patch -p1 < 50_add_susfs_in_kernel-4.9.patch
 
 # Replace fs/open.c with manually patched version
-echo "Replacing fs/open.c with manually patched version..."
-cp patches/open.c fs/open.c
+# echo "Replacing fs/open.c with manually patched version..."
+# cp patches/open.c fs/open.c
 
 # Custom GCC Setup (If enabled)
 if [[ $USE_CUSTOM_GCC == "1" ]]; then
