@@ -34,9 +34,9 @@ jobs:
         name: kernel-build
         path: ./zipd/
 
-   # - name: Upload full repository as artifact
-    #  if: success() || failure()
-     # uses: actions/upload-artifact@v4
-      #with:
-       # name: full-repository
-        #path: .  # This will upload the entire repository
+    - name: Upload full repository as artifact
+      if: success() || failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: full-repository
+        path: .  # This will upload the entire repository
