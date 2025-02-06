@@ -34,12 +34,17 @@ echo "Cloning repositories..."
 git clone --depth=1 https://github.com/techyminati/android_prebuilts_clang_host_linux-x86_clang-5484270 clang
 git clone --depth=1 https://github.com/Kavindu-Deshapriya/AnyKernel3 anykernel
 
+# KernelSU Setup (If KSU is enabled)
+if [[ $KSU == "1" ]]; then
+    echo "Setting up KernelSU..."
+    curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s -- --cleanup
+    curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -s next
+    # curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
+fi
+
 # Permissions Setup
 echo "Setting permissions for all files..."
 find . -type f -exec chmod 777 {} +
-
-# cleanup KSU tree
-curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s -- --cleanup
 
 # Clone the SUSFS repository from GitLab
 echo "Cloning the SUSFS4KSU repository..."
@@ -49,15 +54,15 @@ git clone --depth=1 --branch kernel-4.9 https://gitlab.com/simonpunk/susfs4ksu.g
 echo "Applying SUSFS patches..."
 
 # Step 1: Copy the required patch files
-# cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./KernelSU-Next/
+cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./KernelSU-Next/
 cp ./susfs4ksu/kernel_patches/50_add_susfs_in_kernel-4.9.patch ./
 cp ./susfs4ksu/kernel_patches/fs/* ./fs/
 cp ./susfs4ksu/kernel_patches/include/linux/* ./include/linux/
 
 # Step 2: Apply SUSFS patches
-# echo "Patching KernelSU for SUSFS..."
-# cd ./KernelSU-Next
-# patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
+echo "Patching KernelSU for SUSFS..."
+cd ./KernelSU-Next
+patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
 
 echo "Patching the Kernel for SUSFS..."
 cd ..
@@ -66,13 +71,6 @@ patch -p1 < 50_add_susfs_in_kernel-4.9.patch
 # Replace fs/open.c with manually patched version
 echo "Replacing fs/open.c with manually patched version..."
 cp patches/readdir.c fs/readdir.c
-
-# KernelSU Setup (If KSU is enabled)
-if [[ $KSU == "1" ]]; then
-    echo "Setting up KernelSU..."
-    curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
-    # curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
-fi
 
 # Custom GCC Setup (If enabled)
 if [[ $USE_CUSTOM_GCC == "1" ]]; then
