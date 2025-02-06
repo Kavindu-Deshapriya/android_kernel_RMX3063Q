@@ -32,7 +32,7 @@
 
 config MTK_IO_BOOST
 	tristate "Create specified boost group for IO related tasks"
-	default n
+	default y
 	help
 	  This selects the support for boosting I/O related tasks in certain
 	  scenarios.
