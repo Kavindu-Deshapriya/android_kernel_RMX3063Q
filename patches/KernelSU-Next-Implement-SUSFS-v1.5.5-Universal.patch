@@ -128,7 +128,7 @@ index 1f3802f6..c16b2e30 100644
 +config KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT
 +    bool "Enable to add bind mounts to ksu's ksu_try_umount automatically (experimental)"
 +    depends on KSU_SUSFS_TRY_UMOUNT
-+    default n
++    default y
 +    help
 +      - Automatically add binded mounts to ksu's ksu_try_umount.
 +      - No susfs command is needed in userspace.
@@ -152,7 +152,7 @@ index 1f3802f6..c16b2e30 100644
 +config KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS
 +    bool "Enable to automatically hide ksu and susfs symbols from /proc/kallsyms"
 +    depends on KSU_SUSFS
-+    default n
++    default y
 +    help
 +      - Automatically hide ksu and susfs symbols from '/proc/kallsyms'.
 +      - Effective on all processes.
