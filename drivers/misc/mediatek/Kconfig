@@ -415,7 +415,7 @@ menu "Performance, Power, and Thermal"
 
 config MTK_FPSGO
 	bool "Support FPSGO framework"
-	default y
+	default n
 	help
 	  Support FPSGO framework for UX & Gaming FPS performance and
 	  low power balance. As a perquisite to ensure FPS performance,
