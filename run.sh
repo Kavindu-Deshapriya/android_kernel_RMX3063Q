@@ -6,6 +6,7 @@ TIMESTAMP=$(date +"%Y%m%d")
 DATES=$(date +"%Y-%m-%d")
 FW=RUI1
 KSU=1  # KernelSU Setup (0 = No, 1 = Yes)
+SUS_FS=0 # SuSFS Patches
 USE_CUSTOM_GCC=1 # Use Custom GCC Toolchain (0 = No, 1 = Yes)
 WIREGUARD=0 # Integrate wireguard (0 = No, 1 = yes)
 
@@ -46,31 +47,28 @@ fi
 echo "Setting permissions for all files..."
 find . -type f -exec chmod 777 {} +
 
-# Clone the SUSFS repository from GitLab
-echo "Cloning the SUSFS4KSU repository..."
-git clone --depth=1 --branch kernel-4.9 https://gitlab.com/simonpunk/susfs4ksu.git ./susfs4ksu
-
-# Apply the SUSFS patch
-echo "Applying SUSFS patches..."
-
-# Step 1: Copy the required patch files
-cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./KernelSU-Next/
-cp ./susfs4ksu/kernel_patches/50_add_susfs_in_kernel-4.9.patch ./
-cp ./susfs4ksu/kernel_patches/fs/* ./fs/
-cp ./susfs4ksu/kernel_patches/include/linux/* ./include/linux/
-
-# Step 2: Apply SUSFS patches
-echo "Patching KernelSU for SUSFS..."
-cd ./KernelSU-Next
-patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
-
-echo "Patching the Kernel for SUSFS..."
-cd ..
-patch -p1 < 50_add_susfs_in_kernel-4.9.patch
-
-# Replace fs/open.c with manually patched version
-echo "Replacing fs/open.c with manually patched version..."
-cp patches/readdir.c fs/readdir.c
+if [[ $SUS_FS == "1" ]]; then
+    # Clone the SUSFS repository from GitLab
+    echo "Cloning the SUSFS4KSU repository..."
+    git clone --depth=1 --branch kernel-4.9 https://gitlab.com/simonpunk/susfs4ksu.git ./susfs4ksu
+    # Apply the SUSFS patch
+    echo "Applying SUSFS patches..."
+    # Step 1: Copy the required patch files
+    cp ./patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./KernelSU-Next/
+    cp ./susfs4ksu/kernel_patches/50_add_susfs_in_kernel-4.9.patch ./
+    cp ./susfs4ksu/kernel_patches/fs/* ./fs/
+    cp ./susfs4ksu/kernel_patches/include/linux/* ./include/linux/
+    # Step 2: Apply SUSFS patches
+    echo "Patching KernelSU for SUSFS..."
+    cd ./KernelSU-Next
+    patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
+    echo "Patching the Kernel for SUSFS..."
+    cd ..
+    patch -p1 < 50_add_susfs_in_kernel-4.9.patch
+    # Replace fs/open.c with manually patched version
+    echo "Replacing fs/open.c with manually patched version..."
+    cp patches/readdir.c fs/readdir.c
+fi
 
 # Custom GCC Setup (If enabled)
 if [[ $USE_CUSTOM_GCC == "1" ]]; then
