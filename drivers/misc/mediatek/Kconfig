@@ -415,7 +415,7 @@ menu "Performance, Power, and Thermal"
 
 config MTK_FPSGO
 	bool "Support FPSGO framework"
-	default n
+	default y
 	help
 	  Support FPSGO framework for UX & Gaming FPS performance and
 	  low power balance. As a perquisite to ensure FPS performance,
@@ -549,6 +549,6 @@ config MTK_FD_LEAK_SPECIFIC_DEBUG
 
 config MTK_DM_VERITY_OFF
 	bool "Disable dm-verity"
-	default n
+	default y
 
 endmenu    # Misc
