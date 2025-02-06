@@ -74,7 +74,7 @@ index 1f3802f6..c16b2e30 100644
 +config KSU_SUSFS_SUS_MOUNT
 +    bool "Enable to hide suspicious mounts"
 +    depends on KSU_SUSFS
-+    default n
++    default y
 +    help
 +      - Allow hiding the user-defined mount paths from /proc/self/[mounts|mountinfo|mountstat].
 +      - Effective on all processes for hiding mount entries.
@@ -84,7 +84,7 @@ index 1f3802f6..c16b2e30 100644
 +config KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT
 +    bool "Enable to hide KSU's default mounts automatically (experimental)"
 +    depends on KSU_SUSFS_SUS_MOUNT
-+    default n
++    default y
 +    help
 +      - Automatically add KSU's default mounts to sus_mount.
 +      - No susfs command is needed in userspace.
