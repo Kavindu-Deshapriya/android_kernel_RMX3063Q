@@ -65,8 +65,7 @@ if [[ $SUS_FS == "1" ]]; then
     # echo "Patching the Kernel for SUSFS..."
     # cd ..
     patch -p1 < 50_add_susfs_in_kernel-4.9.patch
-    # Replace fs/open.c with manually patched version
-    echo "Replacing fs/open.c with manually patched version..."
+    echo "Replacing fs/readdir.c with manually patched version..."
     cp patches/readdir.c fs/readdir.c
 fi
 
