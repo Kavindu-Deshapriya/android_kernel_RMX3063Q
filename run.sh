@@ -6,7 +6,7 @@ TIMESTAMP=$(date +"%Y%m%d")
 DATES=$(date +"%Y-%m-%d")
 FW=RUI1
 KSU=1  # KernelSU Setup (0 = No, 1 = Yes)
-SUS_FS=0 # SuSFS Patches
+SUS_FS=1 # SuSFS Patches
 USE_CUSTOM_GCC=1 # Use Custom GCC Toolchain (0 = No, 1 = Yes)
 WIREGUARD=0 # Integrate wireguard (0 = No, 1 = yes)
 
@@ -39,7 +39,7 @@ git clone --depth=1 https://github.com/Kavindu-Deshapriya/AnyKernel3 anykernel
 if [[ $KSU == "1" ]]; then
     echo "Setting up KernelSU..."
     curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s -- --cleanup
-    curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
+    curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
     # curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
 fi
 
@@ -60,10 +60,10 @@ if [[ $SUS_FS == "1" ]]; then
     cp ./susfs4ksu/kernel_patches/include/linux/* ./include/linux/
     # Step 2: Apply SUSFS patches
     echo "Patching KernelSU for SUSFS..."
-    cd ./KernelSU-Next
-    patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
-    echo "Patching the Kernel for SUSFS..."
-    cd ..
+    # cd ./KernelSU-Next
+    # patch -p1 < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch
+    # echo "Patching the Kernel for SUSFS..."
+    # cd ..
     patch -p1 < 50_add_susfs_in_kernel-4.9.patch
     # Replace fs/open.c with manually patched version
     echo "Replacing fs/open.c with manually patched version..."
