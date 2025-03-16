@@ -575,7 +575,7 @@ CONFIG_OPPO_FORCE_DUMP=y
 #endif
 
 #qinchen@ODM_HQ.Connectivity.NFC, 2020/10/04, add for NFC bring up
-CONFIG_NFC_CHIP_PN553=y
+# CONFIG_NFC_CHIP_PN553 is not set
 
 #ifdef VENDOR_EDIT
 #Weizhenxi@BSP.Kernel.Stability 2020.10.16, Add oppo HealthInfo
