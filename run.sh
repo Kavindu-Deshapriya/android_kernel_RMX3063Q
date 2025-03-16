@@ -6,7 +6,7 @@ TIMESTAMP=$(date +"%Y%m%d")
 DATES=$(date +"%Y-%m-%d")
 FW=RUI1
 KSU=1  # KernelSU Setup (0 = No, 1 = Yes)
-SUS_FS=1 # SuSFS Patches
+SUS_FS=0 # SuSFS Patches
 USE_CUSTOM_GCC=1 # Use Custom GCC Toolchain (0 = No, 1 = Yes)
 WIREGUARD=0 # Integrate wireguard (0 = No, 1 = yes)
 
@@ -39,7 +39,7 @@ git clone --depth=1 https://github.com/Kavindu-Deshapriya/AnyKernel3 anykernel
 if [[ $KSU == "1" ]]; then
     echo "Setting up KernelSU..."
     curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s -- --cleanup
-    curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
+    curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -s next
     # curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
 fi
 
